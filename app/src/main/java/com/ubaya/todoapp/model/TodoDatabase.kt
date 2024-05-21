@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ubaya.todoapp.util.DB_NAME
+import com.ubaya.todoapp.util.MIGRATION_1_2
 
 //bisa lebih dari 1, untuk arrayOf, berdasarkan banyak entity
 //version itu versi database
-@Database(entities = arrayOf(Todo::class), version = 1)
+@Database(entities = arrayOf(Todo::class), version = 2)
 abstract class TodoDatabase:RoomDatabase() {
 
 //    ini dari banyaknya DAO yang dipunya, jadi kalo ada AnimalDao, nanti tambahin lagi abstract funnya
@@ -17,7 +19,9 @@ abstract class TodoDatabase:RoomDatabase() {
         @Volatile private var instance: TodoDatabase ?= null
         private val LOCK = Any()
 
-        fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, TodoDatabase::class.java, "newtododb").build()
+        fun buildDatabase(context: Context) = Room.databaseBuilder(context.applicationContext, TodoDatabase::class.java, DB_NAME)
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
         operator fun invoke(context: Context) {
             if (instance != null) {

@@ -9,9 +9,9 @@
         android:id="@+id/imgEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/checkTask"
-        app:layout_constraintEnd_toEndOf="@+id/checkTask"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/checkTask"
         app:srcCompat="@drawable/material_symbols__ink_pen_outline_rounded" />
 
@@ -23,7 +23,7 @@
         android:layout_marginEnd="16dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
