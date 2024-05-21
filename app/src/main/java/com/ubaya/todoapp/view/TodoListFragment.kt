@@ -48,7 +48,8 @@ class TodoListFragment : Fragment() {
             todoListAdapter.updateTodoList(it)
             if (it.isEmpty()) {
                 binding.recViewTodo?.visibility = View.GONE
-                binding.txtError.setText("Your todo still empty")
+                binding.txtError.text = "Your todo still empty"
+                binding.txtError.visibility = View.VISIBLE
             } else {
                 binding.recViewTodo?.visibility = View.VISIBLE
             }
@@ -67,6 +68,7 @@ class TodoListFragment : Fragment() {
                 binding.txtError?.visibility = View.GONE
             } else {
                 binding.txtError?.visibility = View.VISIBLE
+                binding.txtError.text = "An error occurred"
             }
         })
     }

@@ -24,9 +24,7 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
         loadingLD.value = true
         todoLoadingErrorLD.value = false
         launch {
-            val db = TodoDatabase.buildDatabase(
-                getApplication()
-            )
+            val db = TodoDatabase.buildDatabase(getApplication())
 
             todoLD.postValue(db.todoDao().selectAllTodo())
             loadingLD.postValue(false)
@@ -35,9 +33,7 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
 
     fun clearTask(todo: Todo) {
         launch {
-            val db = TodoDatabase.buildDatabase(
-                getApplication()
-            )
+            val db = TodoDatabase.buildDatabase(getApplication())
 
             db.todoDao().deleteTodo(todo)
 
