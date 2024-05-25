@@ -15,8 +15,9 @@ import com.ubaya.todoapp.viewmodel.ListTodoViewModel
 
 class TodoListFragment : Fragment() {
     private lateinit var viewModel: ListTodoViewModel
-    private val todoListAdapter = TodoListAdapter(arrayListOf(), {item -> viewModel.clearTask(item)})
+    private val todoListAdapter = TodoListAdapter(arrayListOf(), {item -> viewModel.updateDone(item)})
     private lateinit var binding: FragmentTodoListBinding
+    var isDone = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

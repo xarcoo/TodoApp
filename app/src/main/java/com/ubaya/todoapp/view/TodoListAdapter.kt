@@ -22,7 +22,15 @@ class TodoListAdapter(val todoList:ArrayList<Todo>, val adapterOnClick: (Todo) -
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.binding.checkTask.text = todoList[position].title
-        holder.binding.checkTask.isChecked = false
+
+        // ini salah, harusnya kalo isDone == 1, ga muncul
+        if (todoList[position].isDone.equals(1)) {
+            holder.binding.checkTask.isChecked = true
+        } else {
+            holder.binding.checkTask.isChecked = false
+        }
+
+        // ini value checkTask selalu 0 atau false (masih harus diperbaiki)
         holder.binding.checkTask.setOnCheckedChangeListener {
             compoundButton, b ->
             if (compoundButton.isPressed) {

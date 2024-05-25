@@ -1,6 +1,8 @@
 package com.ubaya.todoapp.viewmodel
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.ubaya.todoapp.model.Todo
@@ -24,6 +26,7 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
     fun refresh() {
         loadingLD.value = true
         todoLoadingErrorLD.value = false
+
         launch {
             val db = buildDb(getApplication())
 
@@ -39,6 +42,16 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
             db.todoDao().deleteTodo(todo)
 
             todoLD.postValue(db.todoDao().selectAllTodo())
+        }
+    }
+
+    fun updateDone(todo: Todo) {
+        launch {
+            val db = buildDb(getApplication())
+            // ini value todo.isDone selalu 0 atau false (masih harus diperbaiki)
+            db.todoDao().updateIsDone(todo.isDone, todo.uuid)
+
+            Log.d("test", todo.isDone.toString())
         }
     }
 }
