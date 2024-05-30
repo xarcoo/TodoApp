@@ -49,7 +49,7 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
         launch {
             val db = buildDb(getApplication())
             // ini value todo.isDone selalu 0 atau false (masih harus diperbaiki)
-            db.todoDao().updateIsDone(todo.isDone, todo.uuid)
+            db.todoDao().updateIsDone(todo.uuid)
 
             Log.d("test", todo.isDone.toString())
         }

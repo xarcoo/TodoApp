@@ -13,11 +13,13 @@ import androidx.lifecycle.get
 import androidx.navigation.Navigation
 import com.ubaya.todoapp.R
 import com.ubaya.todoapp.databinding.FragmentCreateTodoBinding
+import com.ubaya.todoapp.model.Todo
 import com.ubaya.todoapp.viewmodel.DetailTodoViewModel
 
 class EditTodoFragment : Fragment() {
     private lateinit var binding: FragmentCreateTodoBinding
     private lateinit var viewModel: DetailTodoViewModel
+    private lateinit var todo: Todo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +45,12 @@ class EditTodoFragment : Fragment() {
 
             viewModel.update(binding.txtTitle.text.toString(), binding.txtNotes.text.toString(), radio?.tag.toString().toInt(), uuid)
 
+//            punya bapaknya
+//            todo.title = binding.txtTitle.text.toString()
+//            todo.notes = binding.txtNotes.text.toString()
+//            todo.priority = radio?.tag.toString().toInt()
+//            viewModel.update(todo)
+
             Toast.makeText(view.context, "Todo updated", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }
@@ -50,6 +58,7 @@ class EditTodoFragment : Fragment() {
 
     fun observeViewModel() {
         viewModel.todoLD.observe(viewLifecycleOwner, Observer {
+            todo = it
             binding.txtTitle.setText(it.title)
             binding.txtNotes.setText(it.title)
 
