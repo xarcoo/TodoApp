@@ -40,6 +40,12 @@ val MIGRATION_1_3 = object : Migration (1, 3) {
     }
 }
 
+val MIGRATION_3_4 = object : Migration (3, 4) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE todo ADD COLUMN todo_date INTEGER DEFAULT 0 not null")
+    }
+}
+
 fun buildDb(context: Context): TodoDatabase {
     val db = TodoDatabase.buildDatabase(context)
     return db
@@ -92,6 +98,7 @@ class NotificationHelper(val context: Context) {
     }
 }
 
+//parameternya paten, gabisa diubah
 class TodoWorker(context: Context, params: WorkerParameters): Worker(context, params){
     override fun doWork(): Result {
         NotificationHelper(applicationContext).createNotification(inputData.getString("title").toString(), inputData.getString("message").toString())
